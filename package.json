@@ -1,0 +1,23 @@
+{
+  "name": "test-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "prod": "tsc && supervisor ./build/app.js"
+  },
+  "dependencies": {
+    "@types/express": "~4.17.0",
+    "express": "~4.17.1",
+    "mongodb": "^3.5.5",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "typescript": "~3.5.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "reflect-metadata": "^0.1.13"
+  }
+}
