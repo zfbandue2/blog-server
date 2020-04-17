@@ -1,0 +1,21 @@
+1. http://localhost:8888/user/login?username=xiaozhimn&password=123456 登录接口
+
+
+2.http://localhost:8888/thumbsUp/addThumbs?articalId=1&&count=3 插入更新点赞
+
+
+3. http://localhost:8888/thumbsUp/getThumbsCount?articalId=1 获取某一文章的点赞次数
+
+4. http://localhost:8888/comment/saveComment?content=xxx&&articalId=1 发表评论
+
+
+5. http://localhost:8888/comment/getCommentList 获取谋篇文章的所有评论
+
+
+6. http://localhost:8888/artical/saveArtical?title=javascript&&type=1&&content=bilibili&articalId=1 发布及更新文章
+
+
+7. http://localhost:8888/artical/getArticalDetail?articalId=1 获取文章详情
+
+
+8. http://localhost:8888/artical/getArticalList?key=java 分页获取文章数据 

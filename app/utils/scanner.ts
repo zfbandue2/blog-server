@@ -16,7 +16,7 @@ export default class Router {
                             var isFile = stats.isFile();//是文件
                             var isDir = stats.isDirectory();//是文件夹
                             if(isFile) {
-                                let controller =  require("../../" + filedir);
+                                require("../../" + filedir);
                             } else if(isDir){
                                 self.buildRouter(scanDir);
                             }

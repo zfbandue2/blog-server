@@ -14,18 +14,15 @@ const descriptorBuilder = {
     setRouter(target: any, path: string) {
         let routerMap = target.mapping;
         for(let childpath in routerMap) {
-            
             let comboPath = childpath;
             if(path != "/") {
                 comboPath = path + childpath;
             }
             global.app[routerMap[childpath].method](comboPath, function(req: any, res: any) {
-                let result = routerMap[childpath].callback(req);
-                if(typeof result == "object") {
-                    res.json(result);
-                } else {
-                    res.end(result);
-                }
+                let instance = new target(); 
+                instance.req = req;
+                instance.res =res;
+                routerMap[childpath].callback.call(instance, req, res);
             })
         }
     }
