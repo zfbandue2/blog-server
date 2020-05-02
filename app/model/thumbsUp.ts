@@ -1,14 +1,5 @@
 import db from "../common/db";
 export default class thumbsUp {
-    insertThumbs(data: object, callback : Function) {
-        db.insert({
-            bizType: "blog",//数据库
-            collection: "thumbs_up", //数据表
-            data
-        }, (res:any)=> {
-            callback(res);
-        });
-    }
     updateThumbs(data: any, callback: Function) {
         db.update({
             bizType: "blog",//数据库

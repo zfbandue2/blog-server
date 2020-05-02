@@ -1,6 +1,8 @@
 import {controller, get, post} from "../utils/decorator";
 import user from "../model/user";
 import baseController from "./baseController";
+let nodecache = require("nodecache");
+let md5 = require("md5");
 @controller("/user")
 export default class userController extends baseController{
     user: any;
@@ -16,7 +18,18 @@ export default class userController extends baseController{
             username: username,
             password: password
         }, (data: any)=> {
-            this.success(data);//给客户端返回json数据
+            if(data.length > 0) {//登录成功
+                let token = md5(username + password);
+                nodecache.set(token, data[0].userId);
+                this.success({
+                    isLogin: "ok",
+                    token: token 
+                });
+            } else {//表示登录失败
+                this.error({
+                    isLogin: "no"
+                });
+            }
         });
     }
 }

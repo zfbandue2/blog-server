@@ -1,11 +1,10 @@
 import db from "../common/db";
 export default class comment {
     insertComment(data: any, callback: Function) {
-        db.update({
+        db.insert({
             bizType: "blog",//数据库
             collection: "comment", //数据表
-            query: {articalId: data.articalId},
-            data: {content: data.content}
+            data: data
         }, (res:any)=> {
             callback(res.result);
         });
@@ -15,7 +14,7 @@ export default class comment {
             bizType: "blog",//数据库 
             collection: "comment", //数据表
             query: {
-                id: articalId
+                articalId: articalId
             }
         }, (res:any) => {
             callback(res);   

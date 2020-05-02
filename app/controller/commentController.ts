@@ -9,7 +9,7 @@ export default class commentController extends baseController {
          super();
          this.comment = new comment();
      }
-     @post("/saveComment")
+     @get("/saveComment")
      public saveComment(req: any, res: any) {
          this.comment.insertComment({
               content: req.param("content"),
@@ -20,7 +20,7 @@ export default class commentController extends baseController {
      }
      @get("/getCommentList")
      public getCommentList(req: any, res: any) {
-        this.comment.queryCommentListByArticalId(req.param("param"), (data: any)=> {
+        this.comment.queryCommentListByArticalId(req.param("articalId"), (data: any)=> {
             this.success(data);
         });
      }

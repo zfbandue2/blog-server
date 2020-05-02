@@ -26,7 +26,6 @@ export default class artical {
         if(!<number>pageSize) {
             pageSize = 20;
         }
-        let articalList = [];
         db.getCollection({
             bizType: "blog",//数据库
             collection: "artical" //数据表

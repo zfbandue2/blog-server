@@ -21,7 +21,15 @@ export default class thumbsUpController extends baseController{
      @get("/getThumbsCount")
      public getThumbsCount(req: any, res: any) {
         this.thumbsUp.queryThumbsCountByArticalId(req.param("articalId"), (data: any)=> {
-               this.success(data);
+               if(data && data.length > 0) {
+                    this.success({
+                        count: data[0].count
+                    });
+                } else {
+                    this.error({
+                        err: data.err
+                    });
+                }
         });
      }
 }
