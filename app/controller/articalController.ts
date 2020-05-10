@@ -31,14 +31,7 @@ export default class articalController extends baseController{
      }
      @get("/getArticalDetail")
      public getArticalDetail(req: any, res: any) {
-          let userId = this.getUserId(); 
-          if(!userId) {
-               this.error({
-                    code: 401
-               }); 
-               return;//必须要return
-          } 
-          this.artical.queryArticalById(req.param("articalId"), userId, (data: any)=> {
+          this.artical.queryArticalById(req.param("articalId"), (data: any)=> {
                this.success(data);
           });        
      }  
@@ -52,6 +45,12 @@ export default class articalController extends baseController{
                return;//必须要return
           } 
           this.artical.queryArticalList(req.param("currentPage"), req.param("key"), 20, userId, (data:any)=> {
+               this.success(data);   
+          });
+     }
+     @get("/getAllArticalList")
+     public getAllArticalList(req: any, res: any) {
+          this.artical.queryArticalList(req.param("currentPage"), req.param("key"), 20, "", (data:any)=> {
                this.success(data);   
           });
      }

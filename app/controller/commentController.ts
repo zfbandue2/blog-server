@@ -9,7 +9,7 @@ export default class commentController extends baseController {
          super();
          this.comment = new comment();
      }
-     @get("/saveComment")
+     @post("/saveComment")
      public saveComment(req: any, res: any) {
          this.comment.insertComment({
               content: req.param("content"),
