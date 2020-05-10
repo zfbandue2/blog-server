@@ -54,6 +54,17 @@ class connect {
             });
         });
     }
+    public delete(params: any, callback: any) {
+        this.initDB(params.bizType, params.collection, (db:any, collection:any)=> {
+            collection.remove(params.query, function(err: any, res:any) {
+                if(err) {
+                    callback({err: err.message});
+                } else {
+                    callback(res);
+                }
+            });
+        });     
+    } 
     public getCollection(params: any, callback: any) {
         this.initDB(params.bizType, params.collection, (db:any, collection:any)=> {
             callback(collection);

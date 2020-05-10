@@ -9,26 +9,63 @@ export default class articalController extends baseController{
           this.artical = new artical();
      }
      @post("/saveArtical")
-     public saveArtical(req: any, res: any) {
+     public saveArtical(req: any, res: any) { 
+         let userId = this.getUserId(); 
+         if(!userId) {
+              this.error({
+                   code: 401
+              }); 
+              return;//必须要return
+         } 
+         let articalId = req.param("articalId") || this.getUid();
          this.artical.insertArtical({
-               articalId: req.param("articalId"),
+               articalId: articalId,
                title: req.param("title"),
                type: req.param("type"),
-               content: req.param("content")
+               content: req.param("content"),
+               publishDate: new Date().getTime(),
+               userId: userId
          }, (data:any) => {
              this.success(data);
          });
      }
      @get("/getArticalDetail")
      public getArticalDetail(req: any, res: any) {
-          this.artical.queryArticalById(req.param("articalId"), (data: any)=> {
+          let userId = this.getUserId(); 
+          if(!userId) {
+               this.error({
+                    code: 401
+               }); 
+               return;//必须要return
+          } 
+          this.artical.queryArticalById(req.param("articalId"), userId, (data: any)=> {
                this.success(data);
           });        
      }  
      @get("/getArticalList")
      public getArticalList(req: any, res: any) {
-          this.artical.queryArticalList(req.param("currentPage"), req.param("key"), 20, (data:any)=> {
+          let userId = this.getUserId(); 
+          if(!userId) {
+               this.error({
+                    code: 401
+               }); 
+               return;//必须要return
+          } 
+          this.artical.queryArticalList(req.param("currentPage"), req.param("key"), 20, userId, (data:any)=> {
                this.success(data);   
+          });
+     }
+     @get("/deleteArticalById")
+     public deleteArticalById(req: any, res: any) {
+          let userId = this.getUserId(); 
+          if(!userId) {
+               this.error({
+                    code: 401
+               }); 
+               return;//必须要return
+          } 
+          this.artical.deleteArticalById(req.param("articalId"), userId, (data: any) => {
+               this.success(data); 
           });
      }
 }
